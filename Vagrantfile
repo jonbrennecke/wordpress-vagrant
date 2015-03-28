@@ -1,6 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+vagrant_dir = File.expand_path(File.dirname(__FILE__))
+
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
@@ -16,8 +18,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.network :private_network, ip: "192.168.56.12"
 
-  # config.vm.provision "shell", path: "./provision.sh"
-  config.vm.provision "shell", inline: "su - vagrant -c ./provision.sh"
+  # provisioning
+  if File.exists?(File.join(vagrant_dir,'provision','provision.sh')) then
+    config.vm.provision :shell, :path => File.join( "provision", "provision.sh" )
+  end
+
 
   if defined? VagrantPlugins::HostsUpdater
     config.hostsupdater.aliases = ["#{config.vm.hostname}.dev"]
