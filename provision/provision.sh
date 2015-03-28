@@ -9,8 +9,10 @@
 # @link http://github.com/jonbrennecke/wordpress-vagrant
 # 
 
+# See commands as they are run
+set -x
+
 # Setup
-su root
 mkdir -p /vagrant/www
 cd /vagrant/www
 
