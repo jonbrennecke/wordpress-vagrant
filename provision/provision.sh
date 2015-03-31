@@ -39,9 +39,8 @@ wget http://wordpress.org/latest.tar.gz
 tar xzvf latest.tar.gz
 
 # Symlink our nginx conf file to /etc/nginx/, but save the old one in case we need it later
-if [ -f /etc/nginx/nginx.conf ]; th en
+if [ -f /etc/nginx/nginx.conf ]; then
 	mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.old
-else;
 fi; 
 ln -s $(pwd)/nginx.conf /etc/nginx/nginx.conf
 
