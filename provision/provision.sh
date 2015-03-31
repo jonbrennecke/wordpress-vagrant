@@ -39,7 +39,7 @@ if [ -f /etc/nginx/nginx.conf ]; then
 elif [ -L /etc/nginx/nginx.conf ]; then
 	sudo rm -f /etc/nginx/nginx.conf
 fi;
-sudo ln -s $(pwd)/../nginx.conf /etc/nginx/nginx.conf
+sudo ln -s $(pwd)/nginx.conf /etc/nginx/nginx.conf
 
 # Create directory structure for nginx
 mkdir -p /usr/share/nginx/logs
