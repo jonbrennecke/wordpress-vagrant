@@ -14,7 +14,6 @@ set -x
 
 # Setup
 mkdir -p /vagrant/www
-cd /vagrant/www
 
 # @todo determine if user 'vagrant' exists, if not run adduser vagrant
 
@@ -32,14 +31,15 @@ sudo apt-get -y upgrade
 sudo apt-get -y install git mariadb-server php5 php5-mysql php5-fpm nginx
 sudo apt-get -f install
 
-su vagrant
+# su vagrant
+cd /vagrant/www
 
 # Get the wordpress tarball and unpack it
 wget http://wordpress.org/latest.tar.gz
 tar xzvf latest.tar.gz
 
 # Symlink our nginx conf file to /etc/nginx/, but save the old one in case we need it later
-if [ -f /etc/nginx/nginx.conf ]; then
+if [ -f /etc/nginx/nginx.conf ]; th en
 	mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.old
 else;
 fi; 
