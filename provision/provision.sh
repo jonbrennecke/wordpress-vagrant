@@ -17,9 +17,6 @@ mkdir -p /vagrant/www
 
 # @todo determine if user 'vagrant' exists, if not run adduser vagrant
 
-# Give the current user permissions to the /vagrant/www directory
-# chown -r $USER .
-
 # Install aptitude repositories and update
 sudo apt-get -y update
 sudo apt-get -y install software-properties-common python-software-properties
@@ -42,11 +39,11 @@ mkdir -p /usr/share/nginx/logs
 mkdir -p /usr/share/nginx/tmp
 
 # su vagrant
-cd /vagrant/www
+# cd /vagrant/www
 
 # Get the wordpress tarball and unpack it
-wget http://wordpress.org/latest.tar.gz
-tar xzvf latest.tar.gz
+wget http://wordpress.org/latest.tar.gz -P /vagrant/www
+tar xzvf /vagrant/www/latest.tar.gz
 
 # Reload nginx now that we've updated the conf file
 sudo service nginx reload
