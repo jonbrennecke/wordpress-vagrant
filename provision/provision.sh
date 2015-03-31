@@ -35,7 +35,10 @@ tar xzvf /vagrant/www/latest.tar.gz
 # Symlink our nginx conf file to /etc/nginx/, but save the old one in case we need it later
 if [ -f /etc/nginx/nginx.conf ]; then
 	sudo mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.old
-fi; 
+	sudo rm -f /etc/nginx/nginx.conf
+elif [ -L /etc/nginx/nginx.conf ]; then
+	sudo rm -f /etc/nginx/nginx.conf
+fi;
 sudo ln -s $(pwd)/../nginx.conf /etc/nginx/nginx.conf
 
 # Create directory structure for nginx
