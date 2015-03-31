@@ -24,8 +24,8 @@ mkdir -p /vagrant/www
 sudo apt-get -y update
 sudo apt-get -y install software-properties-common python-software-properties
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
-sudo add-apt-repository 'deb http://mirror.stshosting.co.uk/mariadb/repo/10.0/ubuntu trusty main'
-sudo add-apt-repository ppa:ondrej/php5-5.6
+sudo add-apt-repository -y 'deb http://mirror.stshosting.co.uk/mariadb/repo/10.0/ubuntu trusty main'
+sudo add-apt-repository -y ppa:ondrej/php5-5.6
 sudo apt-get -y update
 sudo apt-get -y upgrade
 sudo apt-get -y install git mariadb-server php5 php5-mysql php5-fpm nginx
@@ -35,7 +35,7 @@ sudo apt-get -f install
 if [ -f /etc/nginx/nginx.conf ]; then
 	mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.old
 fi; 
-ln -s $(pwd)/nginx.conf /etc/nginx/nginx.conf
+ln -s $(pwd)/../nginx.conf /etc/nginx/nginx.conf
 
 # Create directory structure for nginx
 mkdir -p /usr/share/nginx/logs
