@@ -16,8 +16,10 @@ set -x
 mkdir -p /vagrant/www
 cd /vagrant/www
 
+# @todo determine if user 'vagrant' exists, if not run adduser vagrant
+
 # Give the current user permissions to the /vagrant/www directory
-chown -r $USER .
+# chown -r $USER .
 
 # Install aptitude repositories and update
 sudo apt-get -y update
@@ -30,19 +32,27 @@ sudo apt-get -y upgrade
 sudo apt-get -y install git mariadb-server php5 php5-mysql php5-fpm nginx
 sudo apt-get -f install
 
+su vagrant
+
 # Get the wordpress tarball and unpack it
 wget http://wordpress.org/latest.tar.gz
 tar xzvf latest.tar.gz
 
 # Symlink our nginx conf file to /etc/nginx/, but save the old one in case we need it later
-mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.old
+if [ -f /etc/nginx/nginx.conf ]; then
+	mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.old
+else;
+fi; 
 ln -s $(pwd)/nginx.conf /etc/nginx/nginx.conf
+
 
 # Create directory structure for nginx
 mkdir -p /usr/share/nginx/logs
 mkdir -p /usr/share/nginx/tmp
 
 # Reload nginx now that we've updated the conf file
-service nginx reload
-service php5-fpm reload
+sudo service nginx reload
+sudo service php5-fpm reload
+
+# mysql -u root -p < 'create database wordpress;'
 
