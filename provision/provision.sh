@@ -55,3 +55,6 @@ sudo service php5-fpm reload
 
 # mysql -u root -p < 'create database wordpress;'
 
+# return shell to defaults
+set +x
+
