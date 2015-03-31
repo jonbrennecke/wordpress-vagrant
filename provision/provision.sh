@@ -28,22 +28,20 @@ sudo apt-get -y upgrade
 sudo apt-get -y install git mariadb-server php5 php5-mysql php5-fpm nginx
 sudo apt-get -f install
 
+# Get the wordpress tarball and unpack it
+wget http://wordpress.org/latest.tar.gz -P /vagrant/www
+tar xzvf /vagrant/www/latest.tar.gz
+
 # Symlink our nginx conf file to /etc/nginx/, but save the old one in case we need it later
 if [ -f /etc/nginx/nginx.conf ]; then
-	mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.old
+	sudo mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.old
 fi; 
-ln -s $(pwd)/../nginx.conf /etc/nginx/nginx.conf
+sudo ln -s $(pwd)/../nginx.conf /etc/nginx/nginx.conf
 
 # Create directory structure for nginx
 mkdir -p /usr/share/nginx/logs
 mkdir -p /usr/share/nginx/tmp
 
-# su vagrant
-# cd /vagrant/www
-
-# Get the wordpress tarball and unpack it
-wget http://wordpress.org/latest.tar.gz -P /vagrant/www
-tar xzvf /vagrant/www/latest.tar.gz
 
 # Reload nginx now that we've updated the conf file
 sudo service nginx reload
