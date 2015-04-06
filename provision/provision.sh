@@ -12,8 +12,10 @@
 # See commands as they are run
 set -x
 
-# Setup
-mkdir -p /vagrant/www
+# Setup a folder for vagrant things and make vagrant it's ownder
+sudo mkdir -p /vagrant/www
+sudo chown -R vagrant /vagrant
+sudo chown -R www-data /vagrant/www
 
 # @todo determine if user 'vagrant' exists, if not run adduser vagrant
 
@@ -30,7 +32,7 @@ sudo apt-get -f install
 
 # Get the wordpress tarball and unpack it
 wget http://wordpress.org/latest.tar.gz -P /vagrant/www
-tar xzvf /vagrant/www/latest.tar.gz
+tar xzvf /vagrant/www/latest.tar.gz -C /vagrant/www
 
 # Symlink our nginx conf file to /etc/nginx/, but save the old one in case we need it later
 if [ -f /etc/nginx/nginx.conf ]; then
@@ -42,8 +44,8 @@ fi;
 sudo ln -s $(pwd)/nginx.conf /etc/nginx/nginx.conf
 
 # Create directory structure for nginx
-mkdir -p /usr/share/nginx/logs
-mkdir -p /usr/share/nginx/tmp
+sudo mkdir -p /usr/share/nginx/logs
+sudo mkdir -p /usr/share/nginx/tmp
 
 
 # Reload nginx now that we've updated the conf file
